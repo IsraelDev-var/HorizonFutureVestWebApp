@@ -1,0 +1,14 @@
+# Archivos de build
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# Archivos de configuración de usuario
+*.user
+*.vs/
+
+# Archivos temporales
+*.log
+*.vsidx
