@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Persistence.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// configuracion de la coneccion a la base de datos
+var connectionString = builder.Configuration.GetConnectionString("DefualtConection");
+builder.Services.AddDbContext<AppContextDB>(opt => { opt.UseSqlServer(connectionString); });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
