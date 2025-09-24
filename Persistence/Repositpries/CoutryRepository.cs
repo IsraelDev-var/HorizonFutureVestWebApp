@@ -18,7 +18,7 @@ namespace Persistence.Repositpries
 
 
         // Agregar pais
-        public async Task<Country> AddAsync(Country country)
+        public async Task<Country?> AddAsync(Country country)
         {
 
             await _contextDB.Set<Country>().AddAsync(country);

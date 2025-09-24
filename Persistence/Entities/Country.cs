@@ -8,6 +8,8 @@ namespace Persistence.Entities
         public required string Name { get; set; }
         public required string ISOCode { get; set; }
 
+        
+
         // relacione 
         //  1 ------ *
 
