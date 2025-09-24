@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace HorizonFutureVestWepApp.Controllers
 {
-    public class CoutryController : Controller
+    public class SimulationRankingController : Controller
     {
         
+
         public IActionResult Index()
         {
             return View();
         }
-        
-        
+      
+      
     }
 }
