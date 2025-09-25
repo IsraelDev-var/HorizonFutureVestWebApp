@@ -8,14 +8,9 @@ using Persistence.Repositpries;
 
 namespace Application.Services
 {
-    public class CountryService
+    public class CountryService(AppContextDB contextDB)
     {
-        private  readonly CoutryRepository _countryRepository;
-
-        public CountryService(AppContextDB contextDB)
-        {
-            _countryRepository = new CoutryRepository(contextDB);
-        }
+        private  readonly CoutryRepository _countryRepository = new CoutryRepository(contextDB);
 
 
         // Agregar pais
@@ -44,14 +39,14 @@ namespace Application.Services
         {
             try
             {
-                Country entity = new() { Id = 0, Name = dto.Name, ISOCode = dto.ISOCode };
+                Country entity = new() { Id = dto.Id, Name = dto.Name, ISOCode = dto.ISOCode };
                 Country? returnEntity = await _countryRepository.UpdateAsync(entity.Id, entity);
-                if (returnEntity != null)
+                if (returnEntity == null)
                 {
-                    return true;
-
+                    return false;
                 }
-                return false;
+
+                return true;
             }
             catch (Exception)
             {

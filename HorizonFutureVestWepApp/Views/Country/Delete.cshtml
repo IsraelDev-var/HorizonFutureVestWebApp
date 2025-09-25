@@ -1,0 +1,25 @@
+﻿@model DeleteCountryViewModel
+@{
+    ViewData["Title"] = "Delete asset type";
+}
+
+<div class="col-12 col-md-6 offset-md-3 ">
+    <div class="card">
+        <div class="card-header bg-danger text-light">
+            <h4 class="text-center">
+                Quiere eliminar el pais 
+                @Model.Name?
+            </h4>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Country" asp-action="Delete" method="POST">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-danger me-2">Delete</button>
+                    <a asp-controller="Country" asp-action="Index" class="btn btn-outline-warning">Back to list</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,36 @@
-﻿@{
+﻿@model SaveCountryViewModel
+
+@{
+    bool editMode = ViewBag.EditMode ?? false;//collapse operator
     ViewData["Title"] = "Country Save";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Mantenimiento de paises Save</h1>
 
+<div class="col-12 col-md-6 offset-md-3 ">
+    <div class="card">
+        <div class="card-header bg-success text-light">
+
+            <h5 class="text-center">@(editMode ? "Edit - " + Model.Name : "Nuevo pais")</h5>
+         </div>
+        <div class="card-body">
+            <form asp-controller="Country" asp-action="@(editMode ? "Edit" : "Create")" method="POST">
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name:</label>
+                    <input class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ISOCode" class="form-label">Codigo ISO:</label>
+                    <input class="form-control" asp-for="ISOCode" />
+                    <span asp-validation-for="ISOCode" class="text-danger"></span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end">Guardar</button>
+                    <a asp-controller="Country" asp-action="Index" class="btn btn-outline-warning float-end me-2">Volver atras</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
