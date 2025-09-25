@@ -2,7 +2,7 @@
 
 namespace Application.ViewModels.Country
 {
-    public class CountryViewModel
+    public class ReedCountryViewModel
     {
         public  int Id { get; set; }
         public required string Name { get; set; }

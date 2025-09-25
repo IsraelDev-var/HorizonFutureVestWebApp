@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace Application.ViewModels.Country
 {
-    public class SaveCountryViewModel
+    public class CreateCountryViewModel
     {
         public int Id { get; set; }
 

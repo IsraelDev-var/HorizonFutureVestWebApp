@@ -1,8 +1,8 @@
-﻿@model CreateCountryViewModel
+﻿@model UpdateCountryViewModel
 
 @{
-    bool editMode = ViewBag.EditMode ?? false;//collapse operator
-    ViewData["Title"] = "Country Save";
+    
+    ViewData["Title"] = "Country Update";
 }
 
 
@@ -10,10 +10,10 @@
     <div class="card">
         <div class="card-header bg-success text-light">
 
-            <h5 class="text-center">@(editMode ? "Edit - " + Model.Name : "Nuevo pais")</h5>
+            <h5 class="text-center">Actualizar - + Model.Name</h5>
          </div>
         <div class="card-body">
-            <form asp-controller="Country" asp-action="@(editMode ? "Edit" : "Create")" method="POST">
+            <form asp-controller="Country" asp-action="Update" method="POST">
                 <input type="hidden" asp-for="Id" />
                 <div class="mb-3">
                     <label asp-for="Name" class="form-label">Name:</label>

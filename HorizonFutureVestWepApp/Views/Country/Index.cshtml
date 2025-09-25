@@ -1,4 +1,4 @@
-﻿@model List<CountryViewModel>
+﻿@model List<ReedCountryViewModel>
 @{
     ViewData["Title"] = "Country list Page";
 }
@@ -55,7 +55,7 @@
                         <th>@item.ISOCode</th>
                         <th>
                         <div class="mt-2">
-                            <a class="btn btn-outline-warning float-end" asp-controller="Country" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-outline-warning float-end" asp-controller="Country" asp-action="Update" asp-route-id="@item.Id">Edit</a>
                             <a class="btn btn-outline-danger float-end me-2"  asp-controller="Country" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </div>
                         </th>

@@ -11,7 +11,8 @@ namespace Persistence.EntityConfigurations
         {
             #region basic Configuration
                 builder.HasKey(x => x.Id);
-                builder.ToTable("Coutries");
+                //builder.Property(x => x.Id).ValueGeneratedOnAdd();
+                builder.ToTable("Paises");
             #endregion
 
             #region Property configuration

@@ -1,22 +1,27 @@
-﻿using Application.DTOs;
-using Application.Services;
+﻿using Application.Dtos.CountryDto;
+
+using Application.Services.CountryService;
 using Application.ViewModels.Country;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Contexts;
-using System.Threading.Tasks;
+
 namespace HorizonFutureVestWepApp.Controllers
 {
     public class CountryController(AppContextDB contextDB) : Controller
     {
 
-        private readonly CountryService _countryService = new CountryService(contextDB);
+        private readonly ReedCountryService _reedcountryService = new (contextDB);
+        private readonly CreateCountryService _createcountryService = new (contextDB);
+        private readonly UpdateCountryService _updatecountryService = new (contextDB);
+        private readonly DeleteCountryService _deletecountryService = new (contextDB);
+
 
         public async Task<IActionResult> Index()
         {
-            var dtos = await _countryService.GetAllWithInclude();
+            var dtos = await _reedcountryService.GetAllWithInclude();
 
             var entityListVms = dtos.Select(c =>
-            new CountryViewModel()
+            new ReedCountryViewModel()
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -32,25 +37,23 @@ namespace HorizonFutureVestWepApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View("Save", new SaveCountryViewModel() { Name = "", ISOCode = "" });
+            return View("Create", new CreateCountryViewModel() { Name = "", ISOCode = "" });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SaveCountryViewModel vm)
+        public async Task<IActionResult> Create(CreateCountryViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View("Save", vm);
+                return View("Create", vm);
             }
 
-            CountryDto dto = new()
+            CreateCountryDto dto = new()
             {
-
-                Id = vm.Id,
                 Name = vm.Name,
                 ISOCode = vm.ISOCode,
             };
-            await _countryService.AddAsync(dto);
+            await _createcountryService.AddAsync(dto);
             return RedirectToRoute(new { Controller = "Country", Action = "Index" });
 
         }
@@ -62,7 +65,7 @@ namespace HorizonFutureVestWepApp.Controllers
         public async Task<IActionResult> Delete(int id)
         {
 
-            var dto = await _countryService.GetById(id);
+            var dto = await _deletecountryService.GetById(id);
             if (dto != null)
             {
                 DeleteCountryViewModel vm = new() { Id = dto.Id, Name = dto.Name };
@@ -80,38 +83,38 @@ namespace HorizonFutureVestWepApp.Controllers
                 return View(vm);
             }
 
-            await _countryService.DeleteAsync(vm.Id);
+            await _deletecountryService.DeleteAsync(vm.Id);
             return RedirectToRoute(new { Controller = "Country", action = "Index" });
             
         }
 
         // editar
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Update(int id)
         {
             ViewBag.EditMode = true;
-            var dto = await _countryService.GetById(id);
+            var dto = await _deletecountryService.GetById(id);
             if(dto != null)
             {
-                SaveCountryViewModel vm = new () { Id = dto.Id, Name = dto.Name, ISOCode = dto.ISOCode };
-                return View("Save", vm);
+                UpdateCountryViewModel vm = new () { Id = dto.Id, Name = dto.Name, ISOCode = dto.ISOCode };
+                return View("Update", vm);
             }
 
             return RedirectToRoute(new { Controller = "Country", action = "Index" });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SaveCountryViewModel vm)
+        public async Task<IActionResult> Update(UpdateCountryViewModel vm)
         {
             
             
             if (!ModelState.IsValid)
             {
                 ViewBag.EditMode = true;
-                return View("Save", vm);
+                return View("Update", vm);
             }
            
             CountryDto dto = new() { Id = vm.Id, Name = vm.Name, ISOCode = vm.ISOCode };
-            await _countryService.UpdateAsync(dto);
+            await _updatecountryService.UpdateAsync(dto);
             return RedirectToRoute(new { Controller = "Country", action = "Index" });
         }
 

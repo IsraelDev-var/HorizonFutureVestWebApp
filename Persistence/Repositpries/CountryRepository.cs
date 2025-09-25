@@ -6,11 +6,11 @@ using Persistence.Entities;
 
 namespace Persistence.Repositpries
 {
-    public class CoutryRepository
+    public class CountryRepository
     {
         private readonly AppContextDB _contextDB;
 
-        public CoutryRepository(AppContextDB country) 
+        public CountryRepository(AppContextDB country) 
         {
             _contextDB = country;
         

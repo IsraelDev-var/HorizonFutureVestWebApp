@@ -13,6 +13,7 @@ namespace Persistence.EntityConfig
         {
             #region Basic Configuration
             builder.HasKey(x => x.Id);
+            //builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.ToTable("TasaRetono");
             #endregion
 

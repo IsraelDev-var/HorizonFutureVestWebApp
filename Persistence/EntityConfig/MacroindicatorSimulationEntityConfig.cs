@@ -11,7 +11,8 @@ namespace Persistence.EntityConfig
         {
             #region Basic Configuration
                 builder.HasKey(m => m.Id);
-                builder.ToTable("SimulacionMacroIndicador");
+            //builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.ToTable("SimulacionMacroIndicador");
             #endregion
             #region Property configuration
             builder.Property(u => u.SimulationWeight).IsRequired();
