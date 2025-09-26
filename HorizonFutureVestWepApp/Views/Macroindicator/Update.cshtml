@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-header bg-success text-light">
 
-            <h5 class="text-center">Actualizar - + Model.Name</h5>
+            <h5 class="text-center">Actualizar - @Model.Name</h5>
          </div>
         <div class="card-body">
             <form asp-controller="Macroindicator" asp-action="Update" method="POST">
@@ -21,9 +21,14 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Weight" class="form-label">Codigo ISO:</label>
+                    <label asp-for="Weight" class="form-label">Peso:</label>
                     <input class="form-control" asp-for="Weight" />
                     <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="HigherIsBetter" class="form-label">¿Más alto es mejor?</label>
+                    <input type="checkbox" asp-for="HigherIsBetter" class="form-check-input" />
+                    <span asp-validation-for="HigherIsBetter" class="text-danger"></span>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-outline-primary float-end">Guardar</button>
@@ -33,4 +38,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

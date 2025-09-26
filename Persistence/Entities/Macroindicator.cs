@@ -9,7 +9,7 @@ namespace Persistence.Entities
         public required string Name { get; set; }
         public required decimal  Weight { get; set; } // validación: suma total ≤ 1
 
-        public required bool HigherIsBetter { get; set; }
+        public  bool HigherIsBetter { get; set; }
 
         // relacion
         // 1 ----- *

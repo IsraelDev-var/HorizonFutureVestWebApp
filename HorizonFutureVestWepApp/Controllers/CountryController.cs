@@ -1,23 +1,21 @@
 ﻿using Application.Dtos.CountryDto;
-using Application.Services.CountryService;
 using Application.ViewModels.Country;
 using Microsoft.AspNetCore.Mvc;
-using Persistence.Contexts;
+using Application.Services.Interface;
+
 
 namespace HorizonFutureVestWepApp.Controllers
 {
-    public class CountryController(AppContextDB contextDB) : Controller
+    public class CountryController(ICountryService countrySevice) : Controller
     {
 
-        private readonly ReedCountryService _reedcountryService = new (contextDB);
-        private readonly CreateCountryService _createcountryService = new (contextDB);
-        private readonly UpdateCountryService _updatecountryService = new (contextDB);
-        private readonly DeleteCountryService _deletecountryService = new (contextDB);
+        private readonly ICountryService _countryService = countrySevice;
+        
 
 
         public async Task<IActionResult> Index()
         {
-            var dtos = await _reedcountryService.GetAllWithInclude();
+            var dtos = await _countryService.GetAllWithIncludeAsync();
 
             var entityListVms = dtos.Select(c =>
             new ReedCountryViewModel()
@@ -52,7 +50,7 @@ namespace HorizonFutureVestWepApp.Controllers
                 Name = vm.Name,
                 ISOCode = vm.ISOCode,
             };
-            await _createcountryService.AddAsync(dto);
+            await _countryService.CreateAsync(dto);
             return RedirectToRoute(new { Controller = "Country", Action = "Index" });
 
         }
@@ -64,7 +62,7 @@ namespace HorizonFutureVestWepApp.Controllers
         public async Task<IActionResult> Delete(int id)
         {
 
-            var dto = await _deletecountryService.GetById(id);
+            var dto = await _countryService.GetByIdAsync(id);
             if (dto != null)
             {
                 DeleteCountryViewModel vm = new() { Id = dto.Id, Name = dto.Name };
@@ -82,7 +80,7 @@ namespace HorizonFutureVestWepApp.Controllers
                 return View(vm);
             }
 
-            await _deletecountryService.DeleteAsync(vm.Id);
+            await _countryService.DeleteAsync(vm.Id);
             return RedirectToRoute(new { Controller = "Country", action = "Index" });
             
         }
@@ -90,8 +88,8 @@ namespace HorizonFutureVestWepApp.Controllers
         // editar
         public async Task<IActionResult> Update(int id)
         {
-            ViewBag.EditMode = true;
-            var dto = await _deletecountryService.GetById(id);
+            
+            var dto = await _countryService.GetByIdAsync(id);
             if(dto != null)
             {
                 UpdateCountryViewModel vm = new () { Id = dto.Id, Name = dto.Name, ISOCode = dto.ISOCode };
@@ -108,12 +106,12 @@ namespace HorizonFutureVestWepApp.Controllers
             
             if (!ModelState.IsValid)
             {
-                ViewBag.EditMode = true;
+                
                 return View("Update", vm);
             }
            
             UpdateCountryDto dto = new() { Id = vm.Id, Name = vm.Name, ISOCode = vm.ISOCode };
-            await _updatecountryService.UpdateAsync(dto);
+            await _countryService.UpdateAsync(dto);
             return RedirectToRoute(new { Controller = "Country", action = "Index" });
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 namespace Application.ViewModels.Macroindicator
 {
     public class CreateMacroindicatorViewModel
@@ -12,8 +13,11 @@ namespace Application.ViewModels.Macroindicator
         public required decimal Weight { get; set; } // validación: suma total ≤ 1
 
         [Required(ErrorMessage = "El peso es Obligatorio ")]
-        public required bool HigherIsBetter { get; set; }
+        public  bool HigherIsBetter { get; set; }
 
 
     }
+
+
+    
 }

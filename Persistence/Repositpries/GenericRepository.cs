@@ -3,10 +3,11 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
 using Persistence.Entities;
+using Persistence.Repositpries.Interface;
 
 namespace Persistence.Repositpries
 {
-    public class GenericRepository<T>(AppContextDB appContextDB) where T : class
+    public class GenericRepository<T>(AppContextDB appContextDB) : IGenericRepository<T> where T : class
     {
 
         protected readonly AppContextDB _contextDB = appContextDB;

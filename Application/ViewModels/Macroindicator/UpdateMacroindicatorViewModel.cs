@@ -8,11 +8,11 @@ namespace Application.ViewModels.Macroindicator
 
         [Required(ErrorMessage = "El Nombre es Obligatorio ")]
         public required string Name { get; set; }
-        [Required(ErrorMessage = "El Peso es Obligatorio ")]
+        
         public required decimal Weight { get; set; } // validación: suma total ≤ 1
 
-        [Required(ErrorMessage = "El es 'Mas Alto' Obligatorio ")]
-        public required bool HigherIsBetter { get; set; }
+        [Required(ErrorMessage = "Debe seleccionar si es más alto mejor")]
+        public  bool HigherIsBetter { get; set; }
 
     }
 }
