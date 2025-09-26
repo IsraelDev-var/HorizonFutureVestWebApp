@@ -1,5 +1,4 @@
-﻿
-using Application.Dtos.CountryDto;
+﻿using Application.Dtos.CountryDto;
 using Persistence.Contexts;
 using Persistence.Repositpries;
 
@@ -27,14 +26,14 @@ namespace Application.Services.CountryService
         }
 
         // obtener por el ID
-        public async Task<CountryDto?> GetById(int id)
+        public async Task<ReedCountryDto?> GetById(int id)
         {
             try
             {
                 var entity = await _countryRepository.GetById(id);
                 if (entity != null)
                 {
-                    CountryDto dto = new() { Id = entity.Id, Name = entity.Name, ISOCode = entity.ISOCode };
+                    ReedCountryDto dto = new() { Id = entity.Id, Name = entity.Name, ISOCode = entity.ISOCode };
 
                     return dto;
                 }

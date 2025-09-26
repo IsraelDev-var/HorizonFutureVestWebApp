@@ -1,5 +1,4 @@
 ﻿using Application.Dtos.CountryDto;
-
 using Application.Services.CountryService;
 using Application.ViewModels.Country;
 using Microsoft.AspNetCore.Mvc;
@@ -113,7 +112,7 @@ namespace HorizonFutureVestWepApp.Controllers
                 return View("Update", vm);
             }
            
-            CountryDto dto = new() { Id = vm.Id, Name = vm.Name, ISOCode = vm.ISOCode };
+            UpdateCountryDto dto = new() { Id = vm.Id, Name = vm.Name, ISOCode = vm.ISOCode };
             await _updatecountryService.UpdateAsync(dto);
             return RedirectToRoute(new { Controller = "Country", action = "Index" });
         }

@@ -13,14 +13,14 @@ namespace Application.Services.CountryService
         
         // obtener todos
 
-        public async Task<List<CountryDto>> GetAllList()
+        public async Task<List<ReedCountryDto>> GetAllList()
         {
             try
             {
-                var entitiesList = await _countryRepository.GetAllListAsync();
+                var entitiesList = await _countryRepository.GetAllList();
 
                 var entityListDto = entitiesList.Select(c =>
-                new CountryDto
+                new ReedCountryDto
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -35,7 +35,7 @@ namespace Application.Services.CountryService
             }
         }
 
-        public async Task<List<CountryDto>> GetAllWithInclude()
+        public async Task<List<ReedCountryDto>> GetAllWithInclude()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace Application.Services.CountryService
                 var entitiesList = await entitiesQuery.Include(c => c.Indicators).ToListAsync();
 
                 var entityListDto = entitiesList.Select( c => 
-                new CountryDto {
+                new ReedCountryDto {
                     Id = c.Id, 
                     Name = c.Name, 
                     ISOCode = c.ISOCode ,

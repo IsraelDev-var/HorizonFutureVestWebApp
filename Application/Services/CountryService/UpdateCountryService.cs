@@ -1,5 +1,4 @@
-﻿
-using Application.Dtos.CountryDto;
+﻿using Application.Dtos.CountryDto;
 using Persistence.Contexts;
 using Persistence.Entities;
 using Persistence.Repositpries;
@@ -12,7 +11,7 @@ namespace Application.Services.CountryService
         
         private readonly CountryRepository _countryRepository = new(appcontextDB);
 
-        public async Task<bool> UpdateAsync(CountryDto dto)
+        public async Task<bool> UpdateAsync(UpdateCountryDto dto)
         {
             try
             {

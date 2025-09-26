@@ -7,14 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // configuracion de la coneccion a la base de datos
-//var connectionString = builder.Configuration.GetConnectionString("Trabajo");
-//builder.Services.AddDbContext<AppContextDB>(opt => { opt.UseSqlServer(connectionString); });
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppContextDB>(opt => { opt.UseSqlServer(connectionString); });
 
 // Configuración de la conexión a MySQL
-var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
-builder.Services.AddDbContext<AppContextDB>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-);
+//var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+//builder.Services.AddDbContext<AppContextDB>(options =>
+//    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+//);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
